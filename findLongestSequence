@@ -1,0 +1,40 @@
+
+// function for checking the number is present in the set
+const magicalIsPresent = (set, num) => {
+  return set.has(num);
+};
+
+
+// function for finding length of longest consecutive sequence in an array of numbers
+const findLongestSequenceFromArray = (arr) => {
+
+  // Remove duplicates from the array and convert to set
+   const uniqueNums = new Set(arr);
+
+  // to store length of longest sequence
+  let maxLength = 0;
+
+  // iterate to each element in the set 
+  for (let num of uniqueNums) {
+
+    // check the iterate elment is the start of new sequence or there is no number before it in the sequence
+    if (!magicalIsPresent(uniqueNums, num - 1)) {
+      let currentLength = 1; // Initialize the current sequence length
+
+    // checking for the next consecutive numbers in the sequence
+      while (magicalIsPresent(uniqueNums, num + 1)) {
+       currentLength++; // Increment the current sequence length
+        num++; // Move to the next number
+      }
+      // Update the maximum sequence length
+      maxLength = Math.max(maxLength, currentLength);
+    }
+  }
+// Return the length of the longest consecutive sequence
+  return maxLength;
+};
+
+
+
+
+
